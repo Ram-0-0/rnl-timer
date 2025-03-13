@@ -9,6 +9,8 @@
 2. Add it to the resource folder
 3. Add `ensure rnl-timer` to `server.cfg`
 4. Restart the server
+## REQUIREMENTS
+- ox_lib
 # USAGE
 ## COMMAND
 `/timer` - Open the timer menu
@@ -46,6 +48,8 @@ Set the "second" unit (must be 1 or higher).
 2. resourceフォルダに追加
 3. `server.cfg`にensure `rnl-timer`を追記
 4. サーバーを再起動
+## REQUIREMENTS
+- ox_lib
 # USAGE
 ## COMMAND
 `/timer` - タイマーメニューを開く
