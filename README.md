@@ -1,4 +1,5 @@
 # rnl-timer
+![](screenshot.png)
 # FEATURE
 - Simple timer system
 - Alarm sound when the timer ends
