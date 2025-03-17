@@ -57,6 +57,7 @@ QBCore
 
 # 使用方法
 `/timer`コマンドを使用してUIを表示/非表示
+
 ![rnl-timer-setting](./timer-script-setting.png)
 ### START/STOP
 タイマーの開始/停止を切り替えます。
