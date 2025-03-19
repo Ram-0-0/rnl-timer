@@ -1,16 +1,3 @@
-let uivisible = false;
-window.addEventListener('message', (e) => {
-    uivisible = !uivisible;
-    if (uivisible) {
-        this.document.body.style.display = 'flex';
-    } else {
-        this.document.body.style.display = 'none';
-        timer_setting.style.display = 'block';
-    };
-});
-
-const test = document.getElementById('test');
-
 const timer_setting = document.querySelector('.timer-setting');
 const timer_toggle_button = document.getElementById('start-toggle');
 const reset_button = document.getElementById('reset');
@@ -20,8 +7,37 @@ const seconds_number = document.getElementById('seconds-number');
 const hours_slider = document.getElementById('hours-slider');
 const minutes_slider = document.getElementById('minutes-slider');
 const seconds_slider = document.getElementById('seconds-slider');
+const scale_number = document.getElementById('scale-number');
+const scale_slider = document.getElementById('scale-slider');
 const close = document.getElementById('close');
+const timer_close = document.getElementById('timer-close');
 const timer = document.getElementById('timer');
+const option_title = document.querySelector('.more-option-title');
+const more_option = document.querySelector('.more-option');
+const more_par = document.querySelector('.more-option-par');
+const timer_position = document.querySelector('.timer-position');
+
+let uivisible = true;
+window.addEventListener('message', () => {
+    if (uivisible) {
+        this.document.body.style.display = 'flex';
+        uivisible = false;
+    } else {
+        timer_setting.style.display = 'block';
+    };
+});
+
+let timervisible = true;
+timer_close.addEventListener('click', (e) => {
+    timervisible = !timervisible;
+    if (timervisible) {
+        timer.style.display = 'block';
+        timer_close.style.color = '#ffff';
+    } else {
+        timer.style.display = 'none';
+        timer_close.style.color = '#525252';
+    };
+})
 
 close.addEventListener('click', () => {
     timer_setting.style.display = 'none';
@@ -31,9 +47,8 @@ close.addEventListener('click', () => {
 hours_slider.addEventListener('input', (e) => {
     hours_number.value = e.target.value;
     setTimerContent();
-})
+});
 hours_number.addEventListener('input', (e) => {
-    console.log(e.target.value);
     if (e.target.value > 23) {
         e.target.value = 23;
     } else if (e.target.value < 0) {
@@ -45,12 +60,12 @@ hours_number.addEventListener('input', (e) => {
     };
     hours_slider.value = e.target.value;
     setTimerContent();
-})
+});
 
 minutes_slider.addEventListener('input', (e) => {
     minutes_number.value = e.target.value;
     setTimerContent();
-})
+});
 minutes_number.addEventListener('input', (e) => {
     if (e.target.value > 59) {
         e.target.value = 59;
@@ -63,12 +78,12 @@ minutes_number.addEventListener('input', (e) => {
     };
     minutes_slider.value = e.target.value;
     setTimerContent();
-})
+});
 
 seconds_slider.addEventListener('input', (e) => {
     seconds_number.value = e.target.value;
     setTimerContent();
-})
+});
 seconds_number.addEventListener('input', (e) => {
     if (e.target.value > 59) {
         e.target.value = 59;
@@ -76,12 +91,32 @@ seconds_number.addEventListener('input', (e) => {
         e.target.value = 0;
     } else if (e.target.value === '') {
         e.target.value = 0;
-    } else if (String(e.target.value).indexOf('0') == 0) {
+    } else if (String(e.target.value).indexOf('0') === 0) {
         e.target.value = String(e.target.value).slice(1);
     };
     seconds_slider.value = e.target.value;
     setTimerContent();
-})
+});
+
+scale_slider.addEventListener('input', (e) => {
+    scale_number.value = e.target.value;
+    setTimerScale();
+});
+scale_number.addEventListener('input', (e) => {
+    if (String(e.target.value).length > 4) {
+        e.target.value = String(e.target.value).slice(0, -1);
+    } else if (e.target.value > 1.2) {
+        e.target.value = 1.2;
+    } else if (String(e.target.value).length === 3 && e.target.value < 0.1) {
+        e.target.value = 0.1;
+    };
+    scale_slider.value = e.target.value;
+    setTimerScale();
+});
+
+function setTimerScale() {
+    timer.style.transform = `scale(${scale_number.value})`;
+};
 
 function setTimerContent() {
     let strHours;
@@ -116,16 +151,19 @@ function ResetTimer() {
     let hours_time = String(Math.floor(res_cur_time / 3600));
     let minutes_time = String(Math.floor((res_cur_time % 3600) / 60));
     let seconds_time = String(Math.floor(((res_cur_time % 3600) % 60)));
+    let hours_times = hours_time;
+    let minutes_times = minutes_time;
+    let seconds_times = seconds_time;
     if (hours_time.length < 2) {
-        hours_time = '0' + hours_time;
+        hours_times = '0' + hours_time;
     };
     if (minutes_time.length < 2) {
-        minutes_time = '0' + minutes_time
+        minutes_times = '0' + minutes_time
     };
     if (seconds_time.length < 2) {
-        seconds_time = '0' + seconds_time;
+        seconds_times = '0' + seconds_time;
     };
-    timer.textContent = hours_time + ':' + minutes_time + ':' + seconds_time;
+    timer.textContent = hours_times + ':' + minutes_times + ':' + seconds_times;
     hours_number.value = hours_time;
     hours_slider.value = hours_time;
     minutes_number.value = minutes_time;
@@ -133,6 +171,7 @@ function ResetTimer() {
     seconds_number.value = seconds_time;
     seconds_slider.value = seconds_time;
     timer_toggle_button.disabled = false;
+    timer_close.disabled = false;
 };
 
 const audio = new Audio('sound.ogg');
@@ -185,6 +224,11 @@ timer_toggle_button.addEventListener('click', () => {
                 seconds_number.disabled = false;
                 seconds_slider.disabled = false;
                 timer_toggle_button.disabled = true;
+                if (!timervisible) {
+                    timervisible = true;
+                    timer.style.display = 'block';
+                    timer_close.style.color = '#ffff';
+                }
                 audio.play();
                 res = setTimeout(() => {
                     ResetTimer();
@@ -211,6 +255,19 @@ timer_toggle_button.addEventListener('click', () => {
         seconds_number.disabled = false;
         seconds_slider.disabled = false;
         clearInterval(interval);
+    };
+});
+
+let option_open = false;
+option_title.addEventListener('click', (e) => {
+    option_open = !option_open;
+    if (option_open) {
+        more_option.style.display = 'block';
+        more_par.style.paddingBottom = '10px';
+
+    } else {
+        more_option.style.display = 'none';
+        more_par.style.paddingBottom = '';
     };
 });
 
