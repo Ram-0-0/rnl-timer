@@ -13,6 +13,7 @@ RegisterCommand('timer', function ()
 end)
 
 RegisterNUICallback('closeUI', function (_, cb)
+    visible = false
     cb({})
     SetNuiFocus(false, false)
 end)
