@@ -11,8 +11,7 @@ body {
     background-color: #0f0f0f;
     color: #ffff;
     position: absolute;
-    top: 0px;
-    right: 50px;
+    right: 52px;
     padding: 20px;
     width: 200px;
     font-size: 50px;
@@ -22,18 +21,34 @@ body {
     transform:scale(0.7);
 }
 
+.close-par {
+    display: flex;
+    justify-content: center;
+}
+
+#timer-close {
+    background-color: transparent;
+    color: #ffff;
+    outline: transparent;
+    border: transparent;
+    font-size: 20px;
+    margin-right: 120px;
+    cursor: pointer;
+    margin-right: 80px;
+}
+
 #close {
     background-color: transparent;
     color: #525252;
     outline: transparent;
     border: transparent;
     font-size: 25px;
-    margin-left: 160px;
+    margin-left: 50px;
     cursor: pointer;
 }
 
 #close:hover {
-    color: #ffff;
+    color: #3f3f3f;
 }
 
 .timer-setting {
@@ -43,8 +58,8 @@ body {
     top: 30%;
     right: 50px;
     padding: 10px 20px;
+    padding-bottom: 15px;
     width: 200px;
-    height: 370px;
     text-align: center;
     color: #ffff;
     border-radius: 20px;
@@ -54,6 +69,7 @@ body {
 #timer-title {
     margin-top: 0px;
     font-size: 30px;
+    margin-bottom: 10px;
 }
 
 .setting-button {
@@ -83,7 +99,7 @@ body {
 }
 
 .timer-setting-bars {
-    text-align: right;
+    text-align: center;
     display: inline-block;
 }
 
@@ -92,6 +108,7 @@ body {
     background-color: transparent;
     width: 174px;
     height: 20px;
+    outline: transparent;
 }
 
 .time-slider::-webkit-slider-runnable-track {
@@ -112,8 +129,7 @@ body {
 }
 
 .time-number {
-    margin-right: 70px;
-    text-align: center !important;
+    text-align: center;
     width: 25px;
     height: 20px;
     outline: transparent;
@@ -125,4 +141,36 @@ body {
 
 .time-number::-webkit-inner-spin-button, .time-number::-webkit-outer-spin-button {
     -webkit-appearance: none;
+}
+
+.more-option-par {
+    display: inline-block;
+    text-align: center;
+    background-color: #272727;
+    border-radius: 5px;
+    margin-top: 5px;
+
+}
+
+.more-option {
+    display: none;
+    text-align: center;
+    margin-top: 5px;
+}
+
+.more-option-title:active {
+    border-radius: 5px;
+    background-color: #525252;
+}
+
+.more-option-title {
+    padding: 5px 57px;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.ui-number {
+    background-color: #3d3d3d;
+    border: 0px;
+    color: #ffff;
 }
