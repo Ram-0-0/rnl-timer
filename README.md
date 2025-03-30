@@ -1,3 +1,5 @@
+timer for fivem
+
 # Features
 - Simple timer system
 - Easy-to-use settings UI
